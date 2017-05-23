@@ -1,0 +1,16 @@
+<p>Estoy mirando 'Fútbol para Todos' con el VLC, funciona espectacular. El único problema que le encontré: no puedo elegir la resolución, y el VLC no siempre reanuda automáticamente la recepción.</p>
+<p>Por suerte encontré una aplicación en python que se encarga de extraer el stream adecuado y abrir el VLC para verlo.</p>
+<pre class="code bash"><a name="rest_code_dd6b9dab9df24558b2222d610d863653-1"></a>$ sudo pip install livestreamer
+<a name="rest_code_dd6b9dab9df24558b2222d610d863653-2"></a>
+<a name="rest_code_dd6b9dab9df24558b2222d610d863653-3"></a><span class="c1">#livestreamer [url del video]</span>
+<a name="rest_code_dd6b9dab9df24558b2222d610d863653-4"></a>$ livestreamer http://www.youtube.com/watch?v<span class="o">=</span>HBfpr5Ye35c
+<a name="rest_code_dd6b9dab9df24558b2222d610d863653-5"></a><span class="o">[</span>cli<span class="o">][</span>info<span class="o">]</span> Found matching plugin youtube <span class="k">for</span> URL http://www.youtube.com/watch?v<span class="o">=</span>HBfpr5Ye35c
+<a name="rest_code_dd6b9dab9df24558b2222d610d863653-6"></a>Available streams: 240p, 360p, 480p, 720p <span class="o">(</span>best<span class="o">)</span>, 72p <span class="o">(</span>worst<span class="o">)</span>
+<a name="rest_code_dd6b9dab9df24558b2222d610d863653-7"></a>
+<a name="rest_code_dd6b9dab9df24558b2222d610d863653-8"></a><span class="c1">#livestreamer [url del video] [stream]</span>
+<a name="rest_code_dd6b9dab9df24558b2222d610d863653-9"></a>$ livestreamer http://www.youtube.com/watch?v<span class="o">=</span>HBfpr5Ye35c 480p
+<a name="rest_code_dd6b9dab9df24558b2222d610d863653-10"></a><span class="o">[</span>cli<span class="o">][</span>info<span class="o">]</span> Found matching plugin youtube <span class="k">for</span> URL http://www.youtube.com/watch?v<span class="o">=</span>HBfpr5Ye35c
+<a name="rest_code_dd6b9dab9df24558b2222d610d863653-11"></a><span class="o">[</span>cli<span class="o">][</span>info<span class="o">]</span> Available streams: 240p, 360p, 480p, 720p <span class="o">(</span>best<span class="o">)</span>, 72p <span class="o">(</span>worst<span class="o">)</span>
+<a name="rest_code_dd6b9dab9df24558b2222d610d863653-12"></a><span class="o">[</span>cli<span class="o">][</span>info<span class="o">]</span> Opening stream: 480p <span class="o">(</span>hls<span class="o">)</span>
+<a name="rest_code_dd6b9dab9df24558b2222d610d863653-13"></a><span class="o">[</span>cli<span class="o">][</span>info<span class="o">]</span> Starting player: /usr/bin/vlc
+</pre>

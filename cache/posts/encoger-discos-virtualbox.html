@@ -1,0 +1,21 @@
+<p>La operacion de encoger los discos de VirtualBox no siempre es directa. A veces es necesario 'limpiar' dichos discos de forma tal que todos sus sectores queden realmente vacíos (y no simplemente 'huérfanos').</p>
+<p>Cuando el disco en cuestión tiene particiones linux, podemos utilizar la aplicación 'zerofree' para limpiarlo. E incluso podemos montar el disco directamente en un anfitrion para saltarnos la virtualización en lo que a la limpieza concierne.</p>
+<ol class="arabic simple">
+<li>Montaje en el anfitrion</li>
+</ol>
+<pre class="code bash"><a name="rest_code_4f41c3b2b10f4f4b8b99e4e573a1a0b9-1"></a>modprobe nbd
+<a name="rest_code_4f41c3b2b10f4f4b8b99e4e573a1a0b9-2"></a>qemu-nbd -c /dev/nbd0 <span class="o">[</span>archivo vdi<span class="o">]</span>
+<a name="rest_code_4f41c3b2b10f4f4b8b99e4e573a1a0b9-3"></a>mount -o ro /dev/nbd0p<span class="o">[</span>nro de particion<span class="o">]</span> <span class="o">[</span>punto de montaje<span class="o">]</span>
+<a name="rest_code_4f41c3b2b10f4f4b8b99e4e573a1a0b9-4"></a><span class="c1">#montarlo como read only, para el zerofree</span>
+</pre><ol class="arabic simple" start="2">
+<li>Limpieza</li>
+</ol>
+<pre class="code bash"><a name="rest_code_4ae17f8f0c134f33b552ea435f1753c4-1"></a>zerofree /dev/nbd0<span class="o">[</span>nro de particion<span class="o">]</span>
+</pre><ol class="arabic simple" start="3">
+<li>Recuperar el espacio asignado</li>
+</ol>
+<pre class="code bash"><a name="rest_code_cdfcaf23711f4af1b78d439f8c159c70-1"></a>umount /dev/nbd0p<span class="o">[</span>nro de particion<span class="o">]</span>
+<a name="rest_code_cdfcaf23711f4af1b78d439f8c159c70-2"></a>VBoxManage modifyhd <span class="o">[</span>archivo vdi<span class="o">]</span> --compact
+</pre><p>Sitios consultados:
+<a class="reference external" href="http://bethesignal.org/blog/2011/01/05/how-to-mount-virtualbox-vdi-image/">http://bethesignal.org/blog/2011/01/05/how-to-mount-virtualbox-vdi-image/</a>
+<a class="reference external" href="http://www.thelinuxdaily.com/2010/02/shrinking-a-dynamic-virtualbox-disk-image/">http://www.thelinuxdaily.com/2010/02/shrinking-a-dynamic-virtualbox-disk-image/</a></p>

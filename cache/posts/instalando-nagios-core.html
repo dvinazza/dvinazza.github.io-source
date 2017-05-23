@@ -1,0 +1,38 @@
+<p>Hace tiempo vengo postergando pasar del Nagios disponible en los repositorios de debian/ubuntu a la versión más reciente de Nagios. Por suerte, cuando por fin me decidí encontré mucha documentación al respecto. No inventé nada, lo único que hice fue recopilar información de varios sitios y darle un diseño más simpático, para que sirva de documentación.</p>
+<p>requerimientos: apache y php activado</p>
+<pre class="code bash"><a name="rest_code_82aef65bf861459e9a0cc912f827e57d-1"></a>apt-get install build-essential
+<a name="rest_code_82aef65bf861459e9a0cc912f827e57d-2"></a>
+<a name="rest_code_82aef65bf861459e9a0cc912f827e57d-3"></a><span class="nb">cd</span> /tmp
+<a name="rest_code_82aef65bf861459e9a0cc912f827e57d-4"></a>wget http://prdownloads.sourceforge.net/sourceforge/nagios/nagios-4.0.7.tar.gz
+<a name="rest_code_82aef65bf861459e9a0cc912f827e57d-5"></a>tar xvfz nagios-4.0.7.tar.gz
+<a name="rest_code_82aef65bf861459e9a0cc912f827e57d-6"></a><span class="nb">cd</span> nagios-4.0.7
+</pre><p>Creamos los usuarios y grupones necesarios</p>
+<pre class="code bash"><a name="rest_code_a572cfbe8e694a138538a9e11a6c339b-1"></a>useradd nagios
+<a name="rest_code_a572cfbe8e694a138538a9e11a6c339b-2"></a>groupadd nagcmd
+<a name="rest_code_a572cfbe8e694a138538a9e11a6c339b-3"></a>/usr/sbin/usermod -a -G nagios nagios
+<a name="rest_code_a572cfbe8e694a138538a9e11a6c339b-4"></a>/usr/sbin/usermod -a -G nagcmd www-data
+<a name="rest_code_a572cfbe8e694a138538a9e11a6c339b-5"></a>/usr/sbin/usermod -a -G nagcmd nagios
+</pre><p>Procedemos con la instalación</p>
+<pre class="code bash"><a name="rest_code_482d3dad3a764792b539865d5fa3a64a-1"></a>./configure --with-nagios-group<span class="o">=</span>nagios --with-command-group<span class="o">=</span>nagcmd --with-mail<span class="o">=</span>/usr/bin/sendmail --with-httpd_conf<span class="o">=</span>/etc/apache2/conf-available
+<a name="rest_code_482d3dad3a764792b539865d5fa3a64a-2"></a>make all
+<a name="rest_code_482d3dad3a764792b539865d5fa3a64a-3"></a>make install
+<a name="rest_code_482d3dad3a764792b539865d5fa3a64a-4"></a>make install-init
+<a name="rest_code_482d3dad3a764792b539865d5fa3a64a-5"></a>make install-config
+<a name="rest_code_482d3dad3a764792b539865d5fa3a64a-6"></a>make install-commandmode
+<a name="rest_code_482d3dad3a764792b539865d5fa3a64a-7"></a>make install-webconf
+</pre><p>Activamos la configuración de apache y reiniciamos los servicios</p>
+<pre class="code bash"><a name="rest_code_0f387ca4a416447b8b15fbeb8157258a-1"></a>a2enconf nagios.conf
+<a name="rest_code_0f387ca4a416447b8b15fbeb8157258a-2"></a>service apache2 restart
+<a name="rest_code_0f387ca4a416447b8b15fbeb8157258a-3"></a>service nagios restart
+</pre><p>Y los plugins? Lo mismo. Descarga e instalación.</p>
+<pre class="code bash"><a name="rest_code_ed7a3496071a47c5a915a78ef153638e-1"></a><span class="nb">cd</span> /tmp
+<a name="rest_code_ed7a3496071a47c5a915a78ef153638e-2"></a>wget http://nagios-plugins.org/download/nagios-plugins-2.0.3.tar.gz
+<a name="rest_code_ed7a3496071a47c5a915a78ef153638e-3"></a>tar xvfz nagios-plugins-2.0.3.tar.gz
+<a name="rest_code_ed7a3496071a47c5a915a78ef153638e-4"></a>
+<a name="rest_code_ed7a3496071a47c5a915a78ef153638e-5"></a><span class="nb">cd</span> nagios-plugins-2.0.3
+<a name="rest_code_ed7a3496071a47c5a915a78ef153638e-6"></a>./configure --with-nagios-user<span class="o">=</span>nagios --with-nagios-group<span class="o">=</span>nagios
+<a name="rest_code_ed7a3496071a47c5a915a78ef153638e-7"></a>make
+<a name="rest_code_ed7a3496071a47c5a915a78ef153638e-8"></a>make install
+<a name="rest_code_ed7a3496071a47c5a915a78ef153638e-9"></a>
+<a name="rest_code_ed7a3496071a47c5a915a78ef153638e-10"></a>service nagios restart <span class="c1">#reiniciamos el servicio</span>
+</pre>

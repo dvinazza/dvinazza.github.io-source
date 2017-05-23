@@ -1,0 +1,17 @@
+<p>En caso de que sea necesario agregar una propiedad particular a un objeto de nagios, se pueden definir variables personalizadas anteponiendo un guión bajo al nombre de la propiedad.</p>
+<p>Algunos ejemplos:</p>
+<pre class="code text"><a name="rest_code_499cb042e59f48a2b1d2be7658200f9d-1"></a>define contact {
+<a name="rest_code_499cb042e59f48a2b1d2be7658200f9d-2"></a>    contact_name        Pepito Sysadmin
+<a name="rest_code_499cb042e59f48a2b1d2be7658200f9d-3"></a>    _twitter_username   nagioslover
+<a name="rest_code_499cb042e59f48a2b1d2be7658200f9d-4"></a>}
+<a name="rest_code_499cb042e59f48a2b1d2be7658200f9d-5"></a>
+<a name="rest_code_499cb042e59f48a2b1d2be7658200f9d-6"></a>define host {
+<a name="rest_code_499cb042e59f48a2b1d2be7658200f9d-7"></a>    host_name       SwitchImportante
+<a name="rest_code_499cb042e59f48a2b1d2be7658200f9d-8"></a>    _mac_address    00:06:5B:A6:AD:AA
+<a name="rest_code_499cb042e59f48a2b1d2be7658200f9d-9"></a>}
+</pre><p>Es importante destacar que cuando se utilicen los macros para completar los valores personalizados en los comandos, es necesario anteponer el origen de la propiedad deseada.</p>
+<pre class="code text"><a name="rest_code_f7cfc8085c524cd39a4d1df831b698f6-1"></a>define command {
+<a name="rest_code_f7cfc8085c524cd39a4d1df831b698f6-2"></a>    command_name    check_ficticio
+<a name="rest_code_f7cfc8085c524cd39a4d1df831b698f6-3"></a>    command_line    /usr/local/nagios/libexec/check_ficticio.py $_HOSTMAC_ADDRESS$
+<a name="rest_code_f7cfc8085c524cd39a4d1df831b698f6-4"></a>}
+</pre><p><a class="reference external" href="http://nagios.sourceforge.net/docs/3_0/customobjectvars.html">http://nagios.sourceforge.net/docs/3_0/customobjectvars.html</a></p>

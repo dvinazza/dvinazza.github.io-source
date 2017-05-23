@@ -1,0 +1,16 @@
+<p>Reemplazar en la configuración del BackupPC el valro de la opción de 'SendmailPath' por '/usr/bin/msmtp'</p>
+<pre class="code bash"><a name="rest_code_c520492c7f4b4b7a869d90e5c8816c1b-1"></a>apt-get install msmtp
+</pre><p>Crear un archivo de configuracion en el home de backuppc</p>
+<pre class="code bash"><a name="rest_code_483f2c8d72104fbab1ef9de98e96d1ff-1"></a>su - backuppc
+<a name="rest_code_483f2c8d72104fbab1ef9de98e96d1ff-2"></a>touch .msmtprc
+<a name="rest_code_483f2c8d72104fbab1ef9de98e96d1ff-3"></a>chmod .msmtprc
+</pre><p>Cargar los siguientes datos dentro.</p>
+<pre class="code text"><a name="rest_code_25a000f132ad4d239b7b98bf578b7851-1"></a>account default
+<a name="rest_code_25a000f132ad4d239b7b98bf578b7851-2"></a>logfile ~/.msmtp.log
+<a name="rest_code_25a000f132ad4d239b7b98bf578b7851-3"></a>tls off
+<a name="rest_code_25a000f132ad4d239b7b98bf578b7851-4"></a>auth login
+<a name="rest_code_25a000f132ad4d239b7b98bf578b7851-5"></a>host [servidor de correo]
+<a name="rest_code_25a000f132ad4d239b7b98bf578b7851-6"></a>from [usuario]
+<a name="rest_code_25a000f132ad4d239b7b98bf578b7851-7"></a>user [usuario]
+<a name="rest_code_25a000f132ad4d239b7b98bf578b7851-8"></a>password [clave]
+</pre>

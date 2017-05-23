@@ -1,0 +1,14 @@
+<p>Instalación de requisitos</p>
+<pre class="code bash"><a name="rest_code_9b2eb698dfee40dda92d5f02d5102870-1"></a>apt-get install libfuse-dev libpolarssl-dev
+<a name="rest_code_9b2eb698dfee40dda92d5f02d5102870-2"></a><span class="nb">cd</span> /tmp
+<a name="rest_code_9b2eb698dfee40dda92d5f02d5102870-3"></a>wget https://github.com/Aorimn/dislocker/archive/master.zip
+<a name="rest_code_9b2eb698dfee40dda92d5f02d5102870-4"></a>unzip master.zip
+<a name="rest_code_9b2eb698dfee40dda92d5f02d5102870-5"></a><span class="nb">cd</span> dislocker-master
+<a name="rest_code_9b2eb698dfee40dda92d5f02d5102870-6"></a>make
+<a name="rest_code_9b2eb698dfee40dda92d5f02d5102870-7"></a>sudo make install
+</pre><p>Montaje de la unidad encriptada, primero como archivo intermedio.</p>
+<pre class="code bash"><a name="rest_code_6df43e41c5254ae79cf966b489a57b2a-1"></a>mkdir /tmp/dislocker <span class="c1">#creo una carpeta para el montaje intermedio</span>
+<a name="rest_code_6df43e41c5254ae79cf966b489a57b2a-2"></a>sudo dislocker -r -V <span class="o">[</span>particion<span class="o">]</span> -p<span class="o">[</span>clave<span class="o">]</span> /tmp/dislocker
+</pre><p>Luego como montaje tradicional.</p>
+<pre class="code bash"><a name="rest_code_f4048ac2e2014f80a8347100ec32b1a7-1"></a>sudo mount -r -o loop /tmp/dislocker/dislocker-file <span class="o">[</span>carpeta donde montar<span class="o">]</span>
+</pre>

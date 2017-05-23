@@ -1,0 +1,5 @@
+<p>Frecuentemente necesitamos limpiar carpetas que usamos de forma temporal, por ejemplo, una carpeta compartida que utilizamos para intercambiar archivos.
+Para realizar la limpieza, podemos utilizar el crontab y el comando find.</p>
+<p>Por ejemplo, podemos limpiar la carpeta los lunes por la madrugada.</p>
+<pre class="code bash"><a name="rest_code_bc68687b38d643f1bbb13f41f164e780-1"></a><span class="m">0</span> <span class="m">5</span> * * <span class="m">1</span> find <span class="o">[</span>carpeta<span class="o">]</span> -mindepth <span class="m">1</span> -mtime +<span class="o">[</span>dias de antigüedad<span class="o">]</span> -delete
+</pre>
